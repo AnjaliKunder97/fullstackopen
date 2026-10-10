@@ -1,10 +1,5 @@
 import Course from './components/Course'
 
-const Total = (props) => {
-  return (
-    <p>Number of exercises {props.total}</p>
-  )
-}
 const App = () => {
   const course = {
     name: 'Half Stack application development',
@@ -30,7 +25,6 @@ const App = () => {
   return (
     <div>
       <Course course={course} />
-      <Total total={course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises} />
     </div>
   )
 }
