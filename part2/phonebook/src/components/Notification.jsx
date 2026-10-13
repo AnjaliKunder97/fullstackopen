@@ -1,11 +1,11 @@
 import '../App.css'
 
-const Notification = ({ message }) => {
-    if (message === null) {
+const Notification = ({ notification  }) => {
+    if (notification  === null) {
         return null
     }
     return (
-        <p className="success">{message}</p>
+        <p className={notification.type}>{notification.message}</p>
     )
 }
 

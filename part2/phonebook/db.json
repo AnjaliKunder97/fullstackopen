@@ -24,16 +24,6 @@
       "name": "Angela",
       "number": "123123123",
       "id": "HvbxSpOMP5M"
-    },
-    {
-      "name": "arto",
-      "number": "1232221",
-      "id": "fRmJjBXuiZQ"
-    },
-    {
-      "name": "nick",
-      "number": "123123123",
-      "id": "5j9OLQkHUrU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
