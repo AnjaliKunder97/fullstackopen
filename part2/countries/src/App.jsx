@@ -7,6 +7,7 @@ import Countries from './components/Countries'
 function App() {
   const [countries, setCountries] = useState([])
   const [filter, setFilter] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState(null)
 
   useEffect(() => {
     countryService
@@ -18,6 +19,7 @@ function App() {
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
+    setSelectedCountry(null)
   }
 
   const countriesToShow = countries.filter(country =>
@@ -27,7 +29,7 @@ function App() {
   return (
     <>
       <Filter filter={filter} handleFilterChange={handleFilterChange}/>
-      {filter !== '' && <Countries countries={countriesToShow} />}
+      {filter !== '' && <Countries countries={countriesToShow} selectedCountry={selectedCountry} showCountryDetails={setSelectedCountry}/>}
     </>
   )
 }
