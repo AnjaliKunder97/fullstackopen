@@ -60,16 +60,20 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
-        .catch(() => {
-          showNotification(
-            `Information of ${existingPerson.name} has already been removed from server`,
-            'error'
-          )
-          setPersons(persons.filter(p => p.id !== existingPerson.id))
+        .catch(error => {
+          if (error.response.status === 404) {
+            showNotification(
+              `Information of ${existingPerson.name} has already been removed from server`,
+              'error'
+            )
+            setPersons(persons.filter(p => p.id !== existingPerson.id))
+          } else {
+            showNotification(error.response.data.error, 'error')
+          }
         })
       }
-    return
-  }
+      return
+    }
 
     const personObject = {
       name: newName.trim(),
@@ -83,6 +87,9 @@ const App = () => {
         showNotification(`Added ${returnedPerson.name}`)
         setNewName('')
         setNewNumber('')
+      })
+      .catch(error => {
+        showNotification(error.response.data.error,'error')
       })
   }
 
