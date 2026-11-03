@@ -106,7 +106,7 @@ app.put('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
     .then(person => {
       if (!person) {
-        response.status(404).end()
+        return response.status(404).end()
       }
 
       person.name = name
