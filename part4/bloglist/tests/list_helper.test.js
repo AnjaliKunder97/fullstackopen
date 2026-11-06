@@ -137,3 +137,28 @@ describe('most blogs', () => {
         assert.deepStrictEqual(result, expected)
     })
 })
+
+describe('most likes', () => {
+    test('when list has no blogs, should be null', () => {
+        const result = listHelper.mostLikes([])
+        assert.strictEqual(result, null)
+    })
+
+    test('when list has only one blog, equals the author and its likes count', () => {
+        const result = listHelper.mostLikes(listWithOneBlog)
+        const expected = {
+            author: 'Edsger W. Dijkstra',
+            likes: 5
+        }
+        assert.deepStrictEqual(result, expected)
+    })
+
+    test('when list has many blogs, equals the author with most number of likes', () => {
+        const result = listHelper.mostLikes(blogs)
+        const expected = {
+            author: 'Edsger W. Dijkstra',
+            likes: 17
+        }
+        assert.deepStrictEqual(result, expected)
+    })
+})
