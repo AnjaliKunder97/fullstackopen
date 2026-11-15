@@ -1,4 +1,4 @@
-const { test, after, beforeEach } = require('node:test')
+const { test, after, beforeEach, before } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -28,6 +28,10 @@ const initialBlogs = [
     },
 ]
 
+before(async () => {
+  await mongoose.connection.asPromise()
+})
+
 beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(initialBlogs)
@@ -44,6 +48,13 @@ test('all blogs are returned', async () => {
     const response = await api.get('/api/blogs')
 
     assert.strictEqual(response.body.length, initialBlogs.length)
+})
+
+test('the unique identifier for a blog is id not _id', async () => {
+    const response = await api.get('/api/blogs')
+
+    assert(response.body[0].id)
+    assert.strictEqual(response.body[0]._id, undefined)
 })
 
 after(async () => {
