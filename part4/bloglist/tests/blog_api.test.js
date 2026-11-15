@@ -28,6 +28,11 @@ const initialBlogs = [
     },
 ]
 
+const blogsInDb = async () => {
+  const blogs = await Blog.find({})
+  return blogs.map(blog => blog.toJSON())
+}
+
 before(async () => {
   await mongoose.connection.asPromise()
 })
@@ -125,6 +130,23 @@ test('blog without url is not added', async () => {
 
   const response = await api.get('/api/blogs')
   assert.strictEqual(response.body.length, initialBlogs.length)
+})
+
+test('a blog can be deleted', async () => {
+    const blogsAtStart = await blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+
+    const blogsAtEnd = await blogsInDb()
+
+    assert.strictEqual(blogsAtEnd.length, initialBlogs.length - 1)
+
+    const titles = blogsAtEnd.map(blog => blog.title)
+    assert(!titles.includes(blogToDelete.title))
+    
 })
 
 after(async () => {
