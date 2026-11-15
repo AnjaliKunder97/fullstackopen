@@ -95,6 +95,38 @@ test('a new blog created without a likes field, is created with likes:0', async 
     assert.strictEqual(response.body.likes, 0)
 })
 
+test('blog without title is not added', async () => {
+  const newBlog = {
+    author: 'Robert C. Martin',
+    url: 'http://blog.cleancoder.com/uncle-bob/2021/11/28/Spacewar.html',
+    likes: 4
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const response = await api.get('/api/blogs')
+  assert.strictEqual(response.body.length, initialBlogs.length)
+})
+
+test('blog without url is not added', async () => {
+  const newBlog = {
+    title: 'Bringing Balance to the Force',
+    author: 'Robert C. Martin',
+    likes: 2
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const response = await api.get('/api/blogs')
+  assert.strictEqual(response.body.length, initialBlogs.length)
+})
+
 after(async () => {
     await mongoose.connection.close()
 })
