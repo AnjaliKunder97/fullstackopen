@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "React patterns",
-  "author": "Michael Chan",
-  "url": "https://reactpatterns.com/",
-  "likes": 7
+  "title": "Bringing Balance to the Force",
+  "author": "Robert C. Martin",
+  "url": "http://blog.cleancoder.com/uncle-bob/2011/01/19/individuals-and-interactions.html",
+  "likes": 2
 }
