@@ -1,0 +1,2 @@
+DELETE http://localhost:3003/api/blogs/6b0449ad40661d8633756aa7
+Authorization: Bearer PASTE_YOUR_TOKEN_HERE
