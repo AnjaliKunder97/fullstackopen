@@ -1,10 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer PASTE_YOUR_TOKEN_HERE
 
 {
-  "title": "Bringing Balance to the Force",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2011/01/19/individuals-and-interactions.html",
-  "likes": 2
+  "title": "Blog created with a token",
+  "author": "Anjali",
+  "url": "https://example.com",
+  "likes": 0
 }
